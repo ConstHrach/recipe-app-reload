@@ -16,12 +16,12 @@ const getPopular = async () => { //fethces recipes from api including api key to
   console.log(data);
   setPopular(data.recipes)
 }
-
+// creates a div for each unique recipe based on id, creates a paragraph based on recipes title (without key prop it would bring errors)
   return <div>
-    
+  
     {popular.map((recipe) => {
       return(
-        <div>
+        <div key={recipe.id}>
           <p>{recipe.title}</p>
         </div>
       );
