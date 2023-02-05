@@ -1,5 +1,5 @@
 import Popular from "../components/Popular";
-import TopPick from "../components/TopPick";
+import TopPick from "../components/VeganPicks";
 
 
 import React from 'react'
