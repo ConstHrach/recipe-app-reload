@@ -13,12 +13,21 @@ useEffect(() => {
 
 
 const getPopular = async () => { //fethces recipes from api including api key to fetch, number=9 will show 9 recipes on load
-  const api = await fetch(`https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_API_KEY}&number=9`)
-  const data = await api.json();
-  console.log(data);
-  setPopular(data.recipes);
-  console.log(data.recipes)
-}
+  //caches results in local storage by making the array into a string with parse(check)
+  const check = localStorage.getItem("popular");
+
+  if(check){
+    setPopular(JSON.parse(check));
+  } else {
+    const api = await fetch(`https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_API_KEY}&number=9`);
+    const data = await api.json();
+
+    localStorage.setItem('popular', JSON.stringify(data.recipes));
+    console.log(data);
+    setPopular(data.recipes);
+    console.log(data.recipes);
+  }
+};
 // displays recipes under the popular picks category, wrapper includes all cards mapped with tilte and image
   return (
   <div>
@@ -35,10 +44,11 @@ const getPopular = async () => { //fethces recipes from api including api key to
 
           {popular.map((recipe) => {
             return(
-              <SplideSlide>
+              <SplideSlide key={recipe.id}>
               <Card>
                 <p>{recipe.title}</p>
                 <img src={recipe.image} alt={recipe.title} />
+                <Gradient />
               </Card>
               </SplideSlide>
             )
@@ -86,4 +96,12 @@ p{
   align-items: center;
 }
 `;
+
+const Gradient = styled.div`
+z-index: 3;
+position: absolute;
+width: 100%;
+height: 100%;
+background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.5));
+`
 export default Popular;
