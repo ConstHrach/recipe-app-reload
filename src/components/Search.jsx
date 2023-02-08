@@ -10,10 +10,10 @@ function Search() {
     const navigate = useNavigate();
     const submitHandler = (e) => {
         e.preventDefault();
-        navigate("/search/"+input); //navigates us to searched page
+        navigate("/searched/"+input); //navigates us to searched page
     };
   return (
-    <FormStyle>
+    <FormStyle onSubmit={submitHandler}>
         <div>
             <FaSearch></FaSearch>
         <input 
