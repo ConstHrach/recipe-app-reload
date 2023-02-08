@@ -20,15 +20,33 @@ const [activeTab, setActiveTab] = useState('instructions');
   useEffect(() => {
   fetchDetails();
   },[params.name]);
-
+// used stack overflow and found that dangerouslySetInnerHtml prevents b tags and so on from showing up in summary
   return <DetailWrapper>
     <div>
       <h2>{details.title}</h2>
       <img src={details.image} alt="" />
     </div>
     <Info>
-      <Button className={activeTab === 'instructions' ? 'active' : ''} onClick={() => setActiveTab('instructions')}>Instructions</Button>
-      <Button className={activeTab === 'ingredients' ? 'active' : ''}onClick={() => setActiveTab('ingredients')}>Ingredients</Button>
+      <Button className={activeTab === 'instructions' ? 'active' : ''} onClick={() => setActiveTab('instructions')}>
+        Instructions
+        </Button>
+      <Button className={activeTab === 'ingredients' ? 'active' : ''}onClick={() => setActiveTab('ingredients')}>
+        Ingredients
+        </Button>
+        {activeTab === 'instructions' && (        <div>
+          <h3 dangerouslySetInnerHTML={{__html: details.summary}}></h3>
+          <h3 dangerouslySetInnerHTML={{__html: details.instructions}}></h3>
+        </div>
+        )}
+        {activeTab === 'ingredients' && (
+          <ul>
+          {details.extendedIngredients.map((ingredient) =>
+            <li key={ingredient.id}>{ingredient.original}</li>
+          )}
+        </ul>
+        )}
+        
+        
     </Info>
   </DetailWrapper>;
   
@@ -59,7 +77,8 @@ color: #313131
 background: white;
 border: 2px solid black;
 margin-right: 2rem;
-font-weight: 600;`
+font-weight: 600;
+`;
 
 const Info = styled.div`
 margin-left: 10rem;

@@ -1,15 +1,15 @@
 import Popular from "../components/Popular";
 import TopPick from "../components/VeganPicks";
-
+import { motion } from "framer-motion";
 
 import React from 'react'
 
 function Home() {
   return (
-    <div>
+    <motion.div>
         <Popular />
         <TopPick />
-    </div>
+    </motion.div>
   )
 }
 

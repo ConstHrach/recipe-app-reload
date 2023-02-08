@@ -19,17 +19,22 @@ function Cuisine() {
         console.log(params.type);
     }, [params.type]);
   
-return <Grid>
-    {cuisine.map((item) => {
-        return (
-            <Card key={item.id}>
+return (
+    <Grid>
+        {cuisine.map((item) => {
+            return (
+                <Card key={item.id}>
+                <Link to={'/recipe/' + item.id}>
                 <img src={item.image} alt="" />
                 <h4>{item.title}</h4>
-            </Card>
-        )
+                </Link>
+                </Card>
+        );
     })}
-</Grid>;
-}
+    </Grid>
+);
+}   
+
 
 const Grid = styled.div`
 display: grid;
