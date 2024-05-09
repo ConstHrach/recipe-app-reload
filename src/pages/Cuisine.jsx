@@ -39,7 +39,7 @@ return (
 const Grid = styled.div`
 display: grid;
 grid-template-columns: repeat(auto-fit, minmax(20rem,1fr));
-grid-grap: 3rem;
+grid-gap: 3rem;
 `;
 const Card=styled.div`
 img {

@@ -19,7 +19,6 @@ function Pages() {
         <Route path="/searched/:search" element={<Searched />} />
         <Route path="/recipe/:name" element={<Recipe />} />
       </Routes>
-   
   )
 }
 
